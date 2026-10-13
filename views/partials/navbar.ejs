@@ -1,0 +1,48 @@
+<nav class="navbar sm:navbar-expand bg-1 fg-2">
+
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="#">Blogify</a>
+
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+
+    <dialog class="drawer drawer-end" tabindex="-1" id="navbarNavAltMarkup" aria-labelledby="navbarNavAltMarkupLabel">
+
+      <div class="drawer-header">
+        <h5 class="drawer-title" id="navbarNavAltMarkupLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="nav nav-pills navbar-nav">
+
+          <a class="nav-link <%= activePage === 'home' ? 'active' : '' %>" aria-current="page" href="/">Home</a>
+
+          <% if (locals.user) { %>
+           
+          <a class="nav-link <%= activePage === 'blog' ? 'active' : '' %> " aria-disabled="true" href="/blog/add-new">Add blog</a>
+          
+          <select class="nav-link " onchange="if(this.value) window.location.href=this.value">
+            <option value="">  <%= user.fullName %></option>
+            <option  value="/user/logout">Logout</option>
+          </select>
+
+          <% }else{ %>
+              <a class="nav-link <%= activePage === 'signup' ? 'active' : '' %> " href="/user/signup">Create Account</a>
+              <a class="nav-link <%= activePage === 'signin' ? 'active' : '' %>" href="/user/signin" aria-disabled="true">Signin</a>
+<% } %>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
+
+<% if(locals.error){ %>
+  <div class="container mt-4">
+   <div class="alert theme-danger" role="alert">
+ <%= locals.error %>
+</div>
+  </div>
+  <% } %>
